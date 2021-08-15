@@ -21,3 +21,11 @@ jobs:
       run: |
        mkdir godot
        mkdir modules
+       
+    - name: clone
+      uses: actions/checkout@v2
+      with:
+        repository: acoaco/gittest
+        
+    - name: check
+      run:  dir
