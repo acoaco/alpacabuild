@@ -20,8 +20,7 @@ jobs:
     - name: Make dir
       run: |
        mkdir godot
-       mkdir modules
-       mkdir modules/qurobullet
+       mkdir godot/modules/qurobullet
        
     - name: clone godot
       uses: actions/checkout@v2
@@ -30,7 +29,8 @@ jobs:
         path: godot
         ref: 3.2.3-stable
     
-    - name: check
-      run: |
-        cd godot
-        dir
+    - name: clone quro
+      uses: actions/checkout@v2
+      with:
+        repository: quinnvoker/qurobullet
+        path: godot/modules/qurobullet
