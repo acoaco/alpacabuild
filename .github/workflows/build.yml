@@ -35,7 +35,7 @@ jobs:
         repository: quinnvoker/qurobullet
         path: godot/modules/qurobullet
         
-# Upload cache on completion and check it out now
+ # Upload cache on completion and check it out now
     # Editing this is pretty dangerous for Windows since it can break and needs to be properly tested with a fresh cache.
     - name: Load .scons_cache directory
       id: windows-editor-cache
@@ -69,7 +69,7 @@ jobs:
         SCONS_CACHE: ${{github.workspace}}/.scons_cache/
       run: |
         cd godot
-        scons tools=yes tests=yes target=release_debug custom_modules="../modules"
+        scons tools=yes tests=yes target=release_debug
         ls -l bin/
     # Execute unit tests for the editor
     - name: Unit Tests
@@ -82,3 +82,4 @@ jobs:
        name: ${{ github.job }}
        path: godot/bin/*
        retention-days: 14
+
