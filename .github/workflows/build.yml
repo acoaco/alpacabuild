@@ -25,7 +25,7 @@ jobs:
     - name: clone
       uses: actions/checkout@v2
       with:
-        repository: acoaco/gittest
+        repository: acoaco/Mindustry-multi-binding-schematics-pack
         path: godot
       
     - name: check
