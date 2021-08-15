@@ -21,13 +21,14 @@ jobs:
       run: |
        mkdir godot
        mkdir modules
+       mkdir modules/qurobullet
        
-    - name: clone
+    - name: clone godot
       uses: actions/checkout@v2
       with:
-        repository: acoaco/Mindustry-multi-binding-schematics-pack
+        repository: godotengine/godot
         path: godot
-        ref: 8e641d77588d389e68f7bbfd51a5945461e1002b
+        ref: 3.2.3-stable
     
     - name: check
       run: |
