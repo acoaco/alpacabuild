@@ -27,7 +27,8 @@ jobs:
       with:
         repository: acoaco/Mindustry-multi-binding-schematics-pack
         path: godot
-      
+    - run: git checkout 8e641d7
+    
     - name: check
       run: |
         cd godot
