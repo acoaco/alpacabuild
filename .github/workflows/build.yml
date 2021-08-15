@@ -1,0 +1,23 @@
+name: 🏁 Windows Builds
+on: [workflow_dispatch]
+
+# Global Settings
+# SCONS_CACHE for windows must be set in the build environment
+env:
+  GODOT_BASE_BRANCH: master
+  SCONSFLAGS: platform=windows verbose=yes warnings=all werror=yes debug_symbols=no --jobs=2 module_text_server_fb_enabled=yes
+  SCONS_CACHE_MSVC_CONFIG: true
+  SCONS_CACHE_LIMIT: 3072
+
+
+jobs:
+  windows-editor:
+    # Windows 10 with latest image
+    runs-on: "windows-latest"
+    name: Editor (target=release_debug, tools=yes, tests=yes)
+
+    steps:
+    - name: Make dir
+      run: |
+       mkdir godot
+       mkdir modules
