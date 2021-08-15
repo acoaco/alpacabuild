@@ -29,4 +29,6 @@ jobs:
         path: godot
       
     - name: check
-      run:  dir
+      run: |
+        cd godot
+        dir
