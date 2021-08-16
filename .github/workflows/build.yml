@@ -33,7 +33,7 @@ jobs:
       id: windows-editor-cache
       uses: actions/cache@v2
       with:
-        path: /.scons_cache/
+        path: ${{github.workspace}}/.scons_cache/
         key: ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
         restore-keys: |
           ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
