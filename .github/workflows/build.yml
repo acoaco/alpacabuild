@@ -4,7 +4,8 @@ on: [workflow_dispatch]
 # Global Settings
 # SCONS_CACHE for windows must be set in the build environment
 env:
-  GODOT_BASE_BRANCH: 3.2
+  GODOT_BASE_BRANCH: 3.x
+  SCONSFLAGS: platform=windows verbose=yes warnings=all werror=yes debug_symbols=no --jobs=2
   SCONS_CACHE_MSVC_CONFIG: true
   SCONS_CACHE_LIMIT: 4096
 
@@ -28,7 +29,7 @@ jobs:
       with:
         repository: godotengine/godot
         path: godot
-        ref: 3.2.3-stable
+        ref: 3.3.2-stable
     
 
     - name: Load .scons_cache directory
