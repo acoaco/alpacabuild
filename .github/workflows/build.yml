@@ -26,7 +26,7 @@ jobs:
       with:
         repository: godotengine/godot
         path: godot
-        ref: 3.2.3-stable
+
     
 
     - name: Load .scons_cache directory
