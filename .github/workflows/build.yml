@@ -34,7 +34,7 @@ jobs:
 
     - name: Load .scons_cache directory
       id: windows-editor-cache
-      uses: actions/cache@v2
+      uses: RevoluPowered/cache@v2.1
       with:
         path: ${{github.workspace}}/.scons_cache/
         key: ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
