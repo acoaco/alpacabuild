@@ -4,11 +4,10 @@ on: [workflow_dispatch]
 # Global Settings
 # SCONS_CACHE for windows must be set in the build environment
 env:
-  GODOT_BASE_BRANCH: 3.x
+  GODOT_BASE_BRANCH: master
   SCONSFLAGS: platform=windows verbose=yes warnings=all werror=yes debug_symbols=no --jobs=2 module_text_server_fb_enabled=yes
   SCONS_CACHE_MSVC_CONFIG: true
   SCONS_CACHE_LIMIT: 3072
-
 
 jobs:
   windows-editor:
@@ -29,24 +28,18 @@ jobs:
         path: godot
         ref: 3.2.3-stable
     
-    - name: clone quro
-      uses: actions/checkout@v2
-      with:
-        repository: quinnvoker/qurobullet
-        path: godot/modules/qurobullet
-        
-  # Upload cache on completion and check it out now
-    # Editing this is pretty dangerous for Windows since it can break and needs to be properly tested with a fresh cache.
+
     - name: Load .scons_cache directory
       id: windows-editor-cache
       uses: actions/cache@v2
       with:
-        path: ${{github.workspace}}/.scons_cache/
+        path: /.scons_cache/
         key: ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
         restore-keys: |
           ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
           ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}
           ${{github.job}}-${{env.GODOT_BASE_BRANCH}}
+          
     # Use python 3.x release (works cross platform; best to keep self contained in it's own step)
     - name: Set up Python 3.x
       uses: actions/setup-python@v2
@@ -63,25 +56,6 @@ jobs:
         python -m pip install scons
         python --version
         scons --version
-        
-    # We should always be explicit with our flags usage here since it's gonna be sure to always set those flags
-    - name: Compilation
-      env:
-        SCONS_CACHE: /.scons_cache/
-      run: |
-        cd godot
-        scons tools=yes target=release_debug
-        ls -l bin/
 
-    # Execute unit tests for the editor
-    - name: Unit Tests
-      run: |
-        cd ./godot
-        ./bin/godot.windows.opt.tools.64.exe --test
-        cd ../
-    - uses: actions/upload-artifact@v2
-      with:
-       name: ${{ github.job }}
-       path: godot/bin/*
-       retention-days: 14
+
 
