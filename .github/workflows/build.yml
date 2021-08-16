@@ -4,16 +4,18 @@ on: [workflow_dispatch]
 # Global Settings
 # SCONS_CACHE for windows must be set in the build environment
 env:
-  GODOT_BASE_BRANCH: master
-  SCONSFLAGS: platform=windows verbose=yes warnings=all werror=yes debug_symbols=no --jobs=2 module_text_server_fb_enabled=yes
+  GODOT_BASE_BRANCH: 3.2
   SCONS_CACHE_MSVC_CONFIG: true
-  SCONS_CACHE_LIMIT: 3072
+  SCONS_CACHE_LIMIT: 4096
+
 
 jobs:
   windows-editor:
     # Windows 10 with latest image
     runs-on: "windows-latest"
-    name: Editor (target=release_debug, tools=yes, tests=yes)
+
+    # Windows Editor - checkout with the plugin
+    name: Editor (target=release_debug, tools=yes)
 
     steps:
     - name: Make dir
@@ -26,7 +28,7 @@ jobs:
       with:
         repository: godotengine/godot
         path: godot
-
+        ref: 3.2.3-stable
     
 
     - name: Load .scons_cache directory
